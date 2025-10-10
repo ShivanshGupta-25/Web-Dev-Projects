@@ -152,6 +152,7 @@ def upload():
         f"Text:\n{DOCUMENT_CONTEXT}"
     )
 
+    simplified_text_raw = ""
     try:
         resp = model.generate_content(prompt)
         simplified_text_raw = extract_response_text(resp) or "⚠️ AI did not return any text."
@@ -265,7 +266,8 @@ class Document(db.Model):
 
     user = db.relationship("User", backref=db.backref("documents", lazy=True))
 
-
+with app.app_context():
+    db.create_all()
 
 # Run the app
 if __name__ == "__main__":
