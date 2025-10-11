@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create and publish your blog posts with ease.">
+    <title>Create Your Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #fce4ec);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            font-size: 3.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        h2 {
+            color: #6a11cb;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 8px;
+            font-size: 1.05em;
+            padding: 12px;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            box-shadow: 0 0 0 4px rgba(106, 17, 203, 0.2);
+            border-color: #6a11cb;
+        }
+
+        button {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            font-size: 1.2em;
+            padding: 15px 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #27ae60, #1abc9c);
+            transform: translateY(-2px);
+        }
+
+        .success-message,
+        .error-message {
+            display: none;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .success-message {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .error-message {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #ffeb3b;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>📝 Write & Create Blog</h1>
+    <p>Your personal space to create and share your thoughts</p>
+</header>
+
+<section id="create" class="container">
+    <h2>✍️ Write & Publish Your Blog</h2>
+    <div id="createBlog" class="mx-auto col-md-10">
+        <form id="blogForm">
+            <div class="mb-3">
+                <label class="form-label" for="blogTitle">Blog Title</label>
+                <input type="text" class="form-control" id="blogTitle" placeholder="Enter your blog title..." required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="blogCategory">Category</label>
+                <select class="form-select" id="blogCategory" required>
+                    <option value="">Choose a category</option>
+                    <option value="Technology">🌐 Technology</option>
+                    <option value="Lifestyle">🧘 Lifestyle</option>
+                    <option value="Travel">✈️ Travel</option>
+                    <option value="Food">🍕 Food</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="blogImage">Image URL</label>
+                <input type="url" class="form-control" id="blogImage" placeholder="https://example.com/image.jpg">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="blogContent">Content</label>
+                <textarea class="form-control" rows="6" id="blogContent" placeholder="Write your blog content here..." required></textarea>
+            </div>
+            <button type="submit">
+                🚀 Publish Blog
+            </button>
+        </form>
+
+        <!-- Success and Error Message -->
+        <div id="successMessage" class="success-message">✅ Your blog has been successfully published!</div>
+        <div id="errorMessage" class="error-message">❌ Oops! Something went wrong. Please try again.</div>
+    </div>
+</section>
+
+<footer>
+    <p>Thank you for writing with us! ✨ | <a href="#">Back to top</a> | <a href="/">BlogSphere</a></p>
+</footer>
+
+<script>
+    document.getElementById('blogForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const title = document.getElementById('blogTitle').value.trim();
+        const category = document.getElementById('blogCategory').value;
+        const content = document.getElementById('blogContent').value.trim();
+
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (title && category && content) {
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+            document.getElementById('blogForm').reset();
+
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+        } else {
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 3000);
+        }
+    });
+</script>
+
+</body>
+</html>
