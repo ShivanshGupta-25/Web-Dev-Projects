@@ -27,6 +27,11 @@ WEB-DEV-PROJECTS/
 │   ├── requirements.txt
 │   └── .gitignore
 │
+├── Tic_Tac_Toe/
+│   ├── index.html
+│   ├── styles.css
+│   ├── app.js
+│
 └── README.md
 ```
 
@@ -82,6 +87,8 @@ git clone https://github.com/ShivanshGupta-25/Web-Dev-Projects/tree/main/BlogPro
 
 git clone https://github.com/ShivanshGupta-25/Web-Dev-Projects/tree/main/LegalDoc-AI_P   # for LegalDoc-AI_P
 
+git clone https://github.com/ShivanshGupta-25/Web-Dev-Projects/tree/main/Tic_Tac_Toe     # for Tic_Tac_Toe game
+
 # change the directory to the cloned project folder
 cd BlogProject
 
@@ -136,6 +143,7 @@ Open in browser → [http://127.0.0.1:5000](http://127.0.0.1:5000)
 |----------|--------------|
 | 📰 **BlogProject** | A Django-based blog platform supporting CRUD posts, admin dashboard, and authentication. |
 | ⚖️ **LegalDoc-AI_P** | An AI-powered assistant that analyzes and processes legal documents using NLP techniques. |
+| ⚖️ **Tic_Tac_Toe** | Tic Tac Toe game built using HTML, CSS, and JavaScript demonstrating DOM manipulation, event handling, game logic implementation, and UI styling. |
 
 ---
 
