@@ -34,6 +34,7 @@ WEB-DEV-PROJECTS/
 │
 ├── ChatWebApp/
 │   ├── chat/
+│   ├── chatvenv/
 │   ├── ChatWebApp/
 │   ├── templates/
 │   └── manage.py
