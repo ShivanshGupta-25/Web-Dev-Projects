@@ -30,7 +30,13 @@ WEB-DEV-PROJECTS/
 ├── Tic_Tac_Toe/
 │   ├── index.html
 │   ├── styles.css
-│   ├── app.js
+│   └── app.js
+│
+├── ChatWebApp/
+│   ├── chat/
+│   ├── ChatWebApp/
+│   ├── templates/
+│   └── manage.py
 │
 └── README.md
 ```
@@ -143,7 +149,8 @@ Open in browser → [http://127.0.0.1:5000](http://127.0.0.1:5000)
 |----------|--------------|
 | 📰 **BlogProject** | A Django-based blog platform supporting CRUD posts, admin dashboard, and authentication. |
 | ⚖️ **LegalDoc-AI_P** | An AI-powered assistant that analyzes and processes legal documents using NLP techniques. |
-| ⚖️ **Tic_Tac_Toe** | Tic Tac Toe game built using HTML, CSS, and JavaScript demonstrating DOM manipulation, event handling, game logic implementation, and UI styling. |
+| **Tic_Tac_Toe** | Tic Tac Toe game built using HTML, CSS, and JavaScript demonstrating DOM manipulation, event handling, game logic implementation, and UI styling. |
+| **ChatWebApp** | A simple chat application built using HTML, CSS, and JavaScript demonstrating DOM manipulation, event handling, and AJAX requests.
 
 ---
 
