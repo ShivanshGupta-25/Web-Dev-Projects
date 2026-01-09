@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ room }} - DjChat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <style>
+    /* Reset & Global Styles */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #display {
+      max-height: 60vh;
+      overflow-y: auto;
+      padding: 10px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      scrollbar-width: thin;
+    }
+
+    .message-container {
+      background-color: rgba(255,255,255,0.2);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .message-container b {
+      color: #fff;
+    }
+
+    .message-container p {
+      margin: 5px 0 10px;
+      color: #f1f1f1;
+    }
+
+    .timestamp {
+      font-size: 0.8em;
+      color: #ddd;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .chat-form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      color: #333;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .chat-form input[type=text] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .chat-form input[type=submit] {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #43e97b, #38f9d7);
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .chat-form input[type=submit]:hover {
+      background: linear-gradient(to right, #38f9d7, #43e97b);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      .chat-form {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>💬 Welcome to <span style="color: #fdfd96;">{{ room }}</span> Room</h2>
+
+  <div id="display">
+    <!-- Messages will be loaded here dynamically -->
+  </div>
+
+  <script>
+    $(document).ready(function(){
+
+      setInterval(function(){
+        $.ajax({
+          type: 'GET',
+          url: "/getMessages/{{ room }}/",
+          success: function (response) {
+            $("#display").empty();
+            response.messages.forEach(function (msg) {
+              const html = `<div class="message-container">
+                  <b>${msg.user}</b>
+                  <p>${msg.msg}</p>
+                  <span class="timestamp">${msg.date}</span>
+                </div>`;
+              $("#display").append(html);
+            });
+            // Auto-scroll to bottom
+            $('#display').scrollTop($('#display')[0].scrollHeight);
+          },
+          error: function () {
+            console.error("Error fetching messages.");
+          }
+        });
+      }, 1000);
+    });
+  </script>
+
+  <div class="chat-form">
+    <form id="post-form">
+      {% csrf_token %}
+
+      <input type="hidden" name="username" id="username" value="{{ username }}">
+      <input type="hidden" name="room_id" id="room_id" value="{{ room_details.id }}">
+      <input type="text" name="message" id="message" placeholder="Type your message..." required>
+      <input type="submit" value="Send Message">
+    </form>
+  </div>
+
+  <!-- Real-time AJAX fetching -->
+  <script type="text/javascript">
+    // Handle message sending
+    $(document).on('submit', '#post-form', function (e) {
+      e.preventDefault();
+      // const message = $('#message').val();
+      // if (!message.trim()) return;
+
+      $.ajax({
+        type: 'POST',
+        url: '/send',
+        data: {
+          username: $('#username').val(),
+          room_id: $('#room_id').val(),
+          message: $('#message').val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        },
+        success: function (data) {
+          // alert(data)
+        },
+        error: function () {
+          alert('Message not sent. Try again.');
+        }
+      });
+      document.getElementById('message').value = ''
+    });
+
+  </script>
+
+</body>
+</html>

@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import google.generativeai as genai
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from werkzeug.utils import secure_filename
@@ -7,6 +8,8 @@ import docx
 import markdown  # pip install markdown
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+
+load_dotenv()
 
 # ---- Flask setup ----
 app = Flask(__name__)
@@ -24,7 +27,7 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key")
 # ---- Google Generative AI setup ----
 # Make sure you have set the environment variable GOOGLE_API_KEY
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 # Simple in-memory store for demo (not suitable for production)
 DOCUMENT_CONTEXT = ""

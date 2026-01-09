@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join Chat Room</title>
+  <style>
+    /* General Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #555;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: linear-gradient(135deg, #3b8dfe, #00d4ff);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    @media (max-width: 500px) {
+      .login-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>💬 Join a Chat Room</h2>
+    <form id="post-form" method="POST" action="/checkview">
+      {% csrf_token %}
+      <label for="room_name">Room Name</label>
+      <input type="text" id="room_name" name="room_name" placeholder="Enter room name" required>
+
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter your name" required>
+
+      <input type="submit" value="Enter Room">
+    </form>
+    <div class="footer">
+      💡Let's Chat
+    </div>
+  </div>
+
+</body>
+</html>

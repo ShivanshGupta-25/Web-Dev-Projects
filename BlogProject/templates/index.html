@@ -46,12 +46,20 @@
       object-fit: cover;
       width: 100%;
     }
-    .like-btn, .comment-btn {
+    .likebtn {
+      font-size: 20px;
       cursor: pointer;
-      transition: color 0.3s;
+      color: #bbb;
+      transition: transform 0.2s ease, color 0.2s ease;
+      user-select: none;
     }
-    .like-btn:hover, .comment-btn:hover {
+    .likebtn:hover, .comment-btn:hover {
       color: #f5576c;
+    }
+
+    .likebtn.liked {
+      color: red;
+      transform: scale(1.3);
     }
     footer {
       background: rgba(0, 0, 0, 0.8);
@@ -81,7 +89,7 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#blogs">Blogs</a></li>
-          <li class="nav-item"><a class="nav-link" href="#create">Write a Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/writeBlog">Write a Blog</a></li>
           <li class="nav-item"><a class="nav-link" href="#">About</a></li>
         </ul>
       </div>
@@ -130,10 +138,9 @@
             <span class="badge bg-primary">{{post.catagory}}</span>
             <div class="d-flex justify-content-between align-items-center mt-3">
               <div>
-                <i class="ri-heart-line like-btn"></i> 23
-                <i class="ri-chat-3-line comment-btn ms-3"></i> 5
+                <i class="btn ri-heart-line likebtn" onclick="toggleLike(this)"></i>
               </div>
-              <button href="post/{{post.id}}" class="btn btn-sm btn-outline-dark">Read More</button>
+              <button class="btn btn-sm btn-outline-dark"><a href="post/{{post.id}}">Read More</a></button>
             </div>
           </div>
         </div>
@@ -181,6 +188,10 @@
       document.getElementById("blogForm").reset();
       window.location.href = "#blogs";
     });
+
+    function toggleLike(likebth) {
+      likebth.classList.toggle("liked");
+    }
   </script>
 
 </body>
